@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trilha A1 · Inglês do zero</title>
-<meta name="description" content="Trilha de 12 aulas de inglês nível A1: vocabulário, gramática, shadowing, escrita, fala e revisão espaçada.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+<title>Mini curso de Inglês · passo a passo, sem dificuldades</title>
+<meta name="description" content="Mini curso de Inglês em 12 aulas, passo a passo e sem dificuldades: vocabulário, gramática, diálogo, escrita, fala e revisão.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📓</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -88,6 +88,21 @@
   }
   .lede{ color:var(--ink-muted); font-size:.98rem; max-width:62ch; }
 
+  /* ---------- Hero (cabeçalho da página inicial) ---------- */
+  .hero{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:26px 22px; box-shadow:var(--shadow); text-align:center;
+  }
+  .school-icons{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; font-size:1.7rem; margin-bottom:10px; }
+  .school-icons span{
+    width:48px; height:48px; border-radius:12px; background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero h1{ font-size:2.1rem; margin:6px 0 2px; }
+  .hero .subtitle{ font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; color:var(--progress); margin:0 0 12px; }
+  .hero .lede{ margin:0 auto; }
+  @media (max-width:640px){ .hero h1{ font-size:1.7rem; } .school-icons{ font-size:1.4rem; } .school-icons span{ width:40px; height:40px; } }
+
   /* ---------- Stat row ---------- */
   .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:22px 0; }
   .stat{
@@ -100,14 +115,16 @@
 
   /* ---------- Check-in strip ---------- */
   .checkin-row{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:14px; }
-  .week-strip{ display:flex; gap:6px; }
+  .week-strip{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px; width:100%; }
   .day-dot{
-    width:30px; height:30px; border-radius:8px; background:var(--surface-2); border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center; font-size:.68rem; color:var(--ink-muted);
-    font-family:'IBM Plex Mono',monospace;
+    border-radius:10px; background:var(--surface-2); border:1px solid var(--border);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+    padding:8px 2px; color:var(--ink-muted);
   }
-  .day-dot.done{ background:var(--progress); color:var(--progress-ink); border-color:var(--progress); }
-  .day-dot.today{ box-shadow:0 0 0 2px var(--accent); }
+  .day-dot .ic{ font-size:1.3rem; line-height:1; }
+  .day-dot .wd{ font-size:.72rem; font-weight:600; }
+  .day-dot.done{ background:var(--progress-soft); color:var(--ink); border-color:var(--progress); }
+  .day-dot.today{ box-shadow:0 0 0 2px var(--accent); color:var(--ink); }
 
   .btn{
     display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:10px;
@@ -126,13 +143,13 @@
     display:flex; gap:10px; overflow-x:auto; padding:6px 2px 14px; margin-top:10px;
   }
   .node{
-    flex:none; width:78px; height:92px; border-radius:12px; border:1px solid var(--border);
+    flex:none; width:88px; height:104px; border-radius:12px; border:1px solid var(--border);
     background:var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center;
     gap:6px; cursor:pointer; position:relative;
   }
   .node .num{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:1rem; }
-  .node .ic{ font-size:1.1rem; }
-  .node .t{ font-size:.58rem; color:var(--ink-muted); text-align:center; padding:0 4px; line-height:1.15; }
+  .node .ic{ font-size:1.4rem; }
+  .node .t{ font-size:.64rem; color:var(--ink-muted); text-align:center; padding:0 4px; line-height:1.15; }
   .node.locked{ background:var(--locked-soft); color:var(--locked); cursor:not-allowed; }
   .node.locked .num, .node.locked .t{ color:var(--locked); }
   .node.available{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
@@ -175,8 +192,15 @@
   }
   .section-nav a.seen{ color:var(--ink); border-color:var(--progress); }
 
-  .lesson-section{ margin-bottom:26px; scroll-margin-top:110px; }
-  .lesson-section h2{ font-size:1.25rem; margin:0 0 4px; display:flex; align-items:center; gap:8px; }
+  .lesson-section{
+    margin-bottom:22px; scroll-margin-top:110px;
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px;
+  }
+  .lesson-section h2{ font-size:1.3rem; margin:0 0 6px; display:flex; align-items:center; gap:10px; }
+  .lesson-section .sec-icon{
+    font-size:1.3rem; width:40px; height:40px; border-radius:10px; background:var(--accent-soft);
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
   .lesson-section .step-num{
     font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-muted); border:1px solid var(--border);
     border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex:none;
@@ -268,7 +292,7 @@
 <body>
 
 <div class="topbar">
-  <div class="brand"><span class="mark">🧭</span> Trilha A1</div>
+  <div class="brand"><span class="mark">📓</span> Mini curso de Inglês</div>
   <div class="streak-chip" id="streakChip">🔥 0</div>
 </div>
 
@@ -276,9 +300,15 @@
 
   <!-- ================= HOME VIEW ================= -->
   <section id="view-home">
-    <div class="eyebrow">Módulo 1 · Fundamentos · A1</div>
-    <h1 class="display" style="font-size:1.9rem;margin:6px 0 6px;">Sua trilha diária de inglês</h1>
-    <p class="lede">12 aulas de ~2 horas, construídas com input compreensível, repetição espaçada, prática de fala em voz alta e testes de recuperação ativa — os métodos com mais evidência científica para aprender um idioma. Complete uma aula por dia, ou avance mais de uma se quiser adiantar a trilha.</p>
+    <header class="hero">
+      <div class="school-icons" aria-hidden="true">
+        <span>📓</span><span>✏️</span><span>🖊️</span><span>📚</span><span>🎒</span><span>🍎</span>
+      </div>
+      <div class="eyebrow">Nível A1 · 12 aulas</div>
+      <h1 class="display">Mini curso de Inglês</h1>
+      <p class="subtitle">passo a passo, sem dificuldades</p>
+      <p class="lede">Uma aula por dia, no seu ritmo. Em cada aula você aprende palavras novas, ouve e repete frases, escreve, fala em voz alta e faz um quiz rápido para fixar.</p>
+    </header>
 
     <div class="stats">
       <div class="stat"><div class="n mono" id="statDay">1/12</div><div class="l">Aula atual</div></div>
@@ -288,7 +318,7 @@
     </div>
 
     <div class="panel">
-      <div class="eyebrow">Check-in</div>
+      <div class="eyebrow">📅 Sua semana de estudos</div>
       <div class="checkin-row">
         <div class="week-strip" id="weekStrip"></div>
         <button class="btn btn-ghost btn-sm" id="btnManualCheckin">Já estudei hoje de outra forma</button>
@@ -302,7 +332,7 @@
     </div>
 
     <div class="panel" style="margin-top:18px;">
-      <div class="eyebrow">Sua trilha</div>
+      <div class="eyebrow">📚 Suas aulas</div>
       <div class="path" id="pathRow"></div>
     </div>
 
@@ -321,25 +351,25 @@
     <nav class="section-nav" id="sectionNav"></nav>
 
     <div class="lesson-section" id="sec-vocab">
-      <h2><span class="step-num">1</span> Vocabulário novo</h2>
+      <h2><span class="sec-icon">📖</span> 1. Vocabulário novo</h2>
       <p class="lede" id="vocabIntro">Ouça cada palavra (🔊) antes de seguir. Isso já é o começo do shadowing.</p>
       <div class="vocab-grid" id="vocabGrid"></div>
     </div>
 
     <div class="lesson-section" id="sec-grammar">
-      <h2><span class="step-num">2</span> Gramática</h2>
+      <h2><span class="sec-icon">✏️</span> 2. Gramática</h2>
       <h3 id="grammarTitle" style="margin:0 0 8px;font-size:1.05rem;"></h3>
       <div id="grammarBody" class="lede" style="max-width:70ch;"></div>
     </div>
 
     <div class="lesson-section" id="sec-dialogue">
-      <h2><span class="step-num">3</span> Diálogo · shadowing</h2>
+      <h2><span class="sec-icon">💬</span> 3. Diálogo · shadowing</h2>
       <p class="lede">Toque em 🔊 e repita em voz alta, imitando o ritmo. Depois tente ler sem áudio.</p>
       <div id="dialogueBox" style="margin-top:12px;"></div>
     </div>
 
     <div class="lesson-section" id="sec-write">
-      <h2><span class="step-num">4</span> Produção escrita</h2>
+      <h2><span class="sec-icon">📝</span> 4. Produção escrita</h2>
       <p class="lede" id="writingPrompt"></p>
       <textarea id="writingInput" placeholder="Write your sentences here…"></textarea>
       <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
@@ -355,7 +385,7 @@ Dica: compare com os exemplos do vocabulário e do diálogo acima.</div>
     </div>
 
     <div class="lesson-section" id="sec-chat">
-      <h2><span class="step-num">5</span> Prática de fala</h2>
+      <h2><span class="sec-icon">🎤</span> 5. Prática de fala</h2>
       <p class="lede" id="chatTopicLine"></p>
       <div class="chat-box">
         <div class="dlg-bubble" style="background:var(--surface);"><button class="speak-btn" id="btnSpeakQuestion" aria-label="Ouvir">🔊</button><span id="speakQuestion"></span></div>
@@ -364,7 +394,7 @@ Dica: compare com os exemplos do vocabulário e do diálogo acima.</div>
     </div>
 
     <div class="lesson-section" id="sec-quiz">
-      <h2><span class="step-num">6</span> Quiz de fixação</h2>
+      <h2><span class="sec-icon">🏆</span> 6. Quiz de fixação</h2>
       <p class="lede">Tente responder de memória antes de olhar o vocabulário acima — é o jeito mais eficaz de fixar.</p>
       <div id="quizBox" style="margin-top:12px;"></div>
       <button class="btn btn-progress" id="btnCheckQuiz">Corrigir quiz</button>
@@ -1106,14 +1136,14 @@ function renderHome(){
   getLast7Checkins().then(function(list){
     var strip = document.getElementById('weekStrip');
     strip.innerHTML = '';
-    var labels = ['D','S','T','Q','Q','S','S'];
+    var labels = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
     list.forEach(function(c){
       var d = document.createElement('div');
       var jsDate = new Date(c.date + 'T00:00:00');
       var wd = jsDate.getDay();
       var done = (c.lessonsCompleted && c.lessonsCompleted.length>0) || c.manual;
       d.className = 'day-dot' + (done ? ' done' : '') + (c.date === todayStr() ? ' today' : '');
-      d.textContent = labels[wd];
+      d.innerHTML = '<span class="ic">' + (done ? '✅' : '📅') + '</span><span class="wd">' + labels[wd] + '</span>';
       d.title = c.date + (done ? ' — praticou' : '');
       strip.appendChild(d);
     });
@@ -1128,7 +1158,7 @@ function renderHome(){
     else if(isDayOpen(L.day)) state = 'available';
     var node = document.createElement('div');
     node.className = 'node ' + state + (L.isReview ? ' review' : '');
-    var icon = state === 'done' ? '✅' : (state === 'locked' ? '🔒' : (L.isReview ? '🔁' : '▶️'));
+    var icon = state === 'done' ? '✅' : (state === 'locked' ? '🔒' : (L.isReview ? '🔁' : '📓'));
     node.innerHTML = '<div class="num mono">D' + L.day + '</div><div class="ic">' + icon + '</div><div class="t">' + L.title.split(' ').slice(0,2).join(' ') + '</div>';
     if(state !== 'locked'){
       node.addEventListener('click', function(day){ return function(){ openLesson(day); }; }(L.day));
@@ -1532,12 +1562,12 @@ function gradeCard(card, correct){
 function buildSectionNav(){
   var nav = document.getElementById('sectionNav');
   var items = [
-    ['sec-vocab','1 Vocabulário'],
-    ['sec-grammar','2 Gramática'],
-    ['sec-dialogue','3 Diálogo'],
-    ['sec-write','4 Escrita'],
-    ['sec-chat','5 Fala'],
-    ['sec-quiz','6 Quiz']
+    ['sec-vocab','📖 Vocabulário'],
+    ['sec-grammar','✏️ Gramática'],
+    ['sec-dialogue','💬 Diálogo'],
+    ['sec-write','📝 Escrita'],
+    ['sec-chat','🎤 Fala'],
+    ['sec-quiz','🏆 Quiz']
   ];
   nav.innerHTML = items.map(function(it){ return '<a href="#'+it[0]+'">'+it[1]+'</a>'; }).join('');
 }
